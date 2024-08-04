@@ -1,0 +1,13 @@
+{
+  "name": "JPL",
+  "icons": [{
+      "src": "./apple-touch-icon.png",
+      "sizes": "256x256",
+      "type": "image/jpg"
+    },{
+      "src": "./apple-touch-icon.png",
+      "sizes": "192x192",
+      "type": "image/jpg"
+    }],
+  "display": "standalone"
+}
