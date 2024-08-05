@@ -32,6 +32,7 @@
   <style>
     input {
       color: rgba(0, 119, 184, 0.5);
+      border: 1px solid rgba(0, 0, 0, .5);
       font-size: 1.2em;
       font-weight: bolder;
       height: 45px;
@@ -132,11 +133,13 @@
 
   <div id="result"></div>
 
-  <script src="data.json"></script>
 
   <script type="module">
 
-    let i_bunkatu = 10;// 何行にするか
+    let i_bunkatu = 200;// 何行にするか
+
+    let data;
+
 
     /* 最初のロード時 */
     onload = async () => {
@@ -144,10 +147,15 @@
 
       let kensaku = text.value;
 
+      const res = await fetch("https://search.find47.jp/ja/images.json");
+      const json = await res.json();
+      data = json.images;
+
+      console.log(data);
+
       const max = data.length;
+      console.log(max);
       let count = 0;
-
-
 
       let b = Math.ceil(max / i_bunkatu);
       console.log(b);
@@ -158,7 +166,7 @@
 
       for (let i = 0; i < b; i++) {
         let v = i + 1;
-        koumoku.innerHTML += '<li onclick="kirikae(' + v + ')">' + v + '</li>';
+        koumoku.innerHTML += '<li class="mt-2 mb-3" onclick="kirikae(' + v + ')">' + v + '</li>';
 
         bunkatu[i] = "";
 
@@ -168,7 +176,7 @@
 
             bunkatu[i] += '<div class="item">' +
               '<span class="item_title">' + data[i * i_bunkatu + mm].title + '</span>' +
-              '<div class="item_ex">' + data[i * i_bunkatu + mm].body + '</div>' +
+              '<img src="' + data[i * i_bunkatu + mm].url + '<" width="100%">' +
               '</div>';
 
             count = count + 1;
